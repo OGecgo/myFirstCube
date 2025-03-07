@@ -1,6 +1,6 @@
 EXEC = Test
 FILE = $(EXEC)
-OBJECTC = algorithm.cpp
+OBJECTC = main.cpp
 CHANGES = $(OBJECTC)
 
 CFLAGS = -g
