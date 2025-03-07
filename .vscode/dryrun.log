@@ -1,0 +1,7 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/go/Desktop/C/Cube'
+rm -f Test
+g++ algorithm.cpp -o Test
+rm -f 
+make: Leaving directory '/home/go/Desktop/C/Cube'
+ 
