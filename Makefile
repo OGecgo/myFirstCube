@@ -1,7 +1,7 @@
 EXEC = Test
 FILE = $(EXEC)
-OBJECTC = main.cpp
-CHANGES = $(OBJECTC)
+OBJECTC = main.cpp myVector.cpp draw.cpp 
+CHANGES = $(OBJECTC) 
 
 CFLAGS = -g
 

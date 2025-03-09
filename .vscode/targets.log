@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Mar  7 23:59:00 2025
+# Make data base, printed on Sun Mar  9 23:15:48 2025
 
 # Variables
 
@@ -103,7 +101,7 @@ MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 6247
+VSCODE_PID = 3934
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -113,7 +111,7 @@ BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
 XDG_DATA_HOME = /home/go/snap/code/184/.local/share
 # environment
-SESSION_MANAGER = local/go-IdeaPad-Gaming-3-15IHU6:@/tmp/.ICE-unix/3074,unix/go-IdeaPad-Gaming-3-15IHU6:/tmp/.ICE-unix/3074
+SESSION_MANAGER = local/go-IdeaPad-Gaming-3-15IHU6:@/tmp/.ICE-unix/3141,unix/go-IdeaPad-Gaming-3-15IHU6:/tmp/.ICE-unix/3141
 # automatic
 *F = $(notdir $*)
 # environment
@@ -153,7 +151,7 @@ SNAP_COOKIE = qv2CWYNC4bkUno9pfmCWtxt2McO_GgbTz5NnmlKXwJ8Giofz54Mv
 # environment
 PATH = /home/go/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/go/.dotnet/tools
 # makefile (from 'Makefile', line 4)
-CHANGES = $(OBJECTC)
+CHANGES = $(OBJECTC) 
 # default
 MAKEFILES := 
 # environment
@@ -169,7 +167,7 @@ LC_TIME = el_GR.UTF-8
 # environment
 SNAP = /snap/code/184
 # environment
-INVOCATION_ID = d6493f40bc85495c8f7b083adde2ddf7
+INVOCATION_ID = 827e87067c9b4ce0a33cbc3613bf4c9f
 # environment
 SNAP_REVISION = 184
 # environment
@@ -207,7 +205,7 @@ SNAP_ARCH = amd64
 # makefile
 .DEFAULT_GOAL := Test
 # environment
-SYSTEMD_EXEC_PID = 3132
+SYSTEMD_EXEC_PID = 3188
 # environment
 DISPLAY = :1
 # environment
@@ -221,13 +219,13 @@ SNAP_DATA = /var/snap/code/184
 # environment
 SNAP_CONTEXT = qv2CWYNC4bkUno9pfmCWtxt2McO_GgbTz5NnmlKXwJ8Giofz54Mv
 # environment
-MANAGERPID = 2697
+MANAGERPID = 2700
 # environment
 DEBUGINFOD_URLS = https://debuginfod.ubuntu.com 
 # environment
 LC_MEASUREMENT = el_GR.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 6192
+GIO_LAUNCHED_DESKTOP_FILE_PID = 3878
 # environment
 _ = /snap/code/184/usr/share/code/code
 # environment
@@ -247,9 +245,7 @@ GDK_PIXBUF_MODULE_FILE = /home/go/snap/code/common/.cache/gdk-pixbuf-loaders.cac
 # environment
 GIO_MODULE_DIR = /home/go/snap/code/common/.cache/gio-modules
 # environment
-JOURNAL_STREAM = 8:18397
-# environment
-VSCODE_DOTNET_INSTALL_TOOL_ORIGINAL_HOME = /home/go
+JOURNAL_STREAM = 8:24790
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -271,7 +267,7 @@ SNAP_NAME = code
 # environment
 GSETTINGS_SCHEMA_DIR = /home/go/snap/code/184/.local/share/glib-2.0/schemas
 # makefile (from 'Makefile', line 3)
-OBJECTC = main.cpp
+OBJECTC = main.cpp myVector.cpp draw.cpp 
 # environment
 PAPERSIZE = a4
 # default
@@ -301,10 +297,9 @@ GDMSESSION = ubuntu
 # environment
 LC_IDENTIFICATION = el_GR.UTF-8
 # environment
- 
 SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
 # variable set hash-table stats:
-# Load=145/1024=14%, Rehash=0, Collisions=8/178=4%
+# Load=144/1024=14%, Rehash=0, Collisions=8/177=5%
 
 # Pattern-specific Variable Values
 
@@ -312,15 +307,24 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Directories
 
-# . (device 66306, inode 16646605): 10 files, no impossibilities.
+# . (device 66306, inode 16646605): 13 files, no impossibilities.
+ 
+make: *** No rule to make target 'all'.  Stop.
 
-# 10 files, no impossibilities in 1 directories.
+
+# 13 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
 # No implicit rules.
 
 # Files
+
+# Not a target:
+myVector.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 rungdb:
 #  Implicit rule search has not been done.
@@ -329,7 +333,7 @@ rungdb:
 #  recipe to execute (from 'Makefile', line 21):
 	gdb ./$(FILE)
 
-Test: main.cpp
+Test: main.cpp myVector.cpp draw.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -341,7 +345,7 @@ Test: main.cpp
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2025-03-07 23:58:58.00845029
+#  Last modified 2025-03-08 23:17:25.431057912
 #  File has been updated.
 #  Successfully updated.
 
@@ -385,20 +389,26 @@ main.cpp:
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+draw.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
-# Load=10/1024=1%, Rehash=0, Collisions=0/21=0%
+# Load=12/1024=1%, Rehash=0, Collisions=0/25=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 19 / storage = 163 B / avg = 8 B
-# current buf: size = 8162 B / used = 163 B / count = 19 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 22 / storage = 194 B / avg = 8 B
+# current buf: size = 8162 B / used = 194 B / count = 22 / avg = 8 B
 
-# strcache performance: lookups = 30 / hit rate = 36%
+# strcache performance: lookups = 35 / hit rate = 37%
 # hash-table stats:
-# Load=19/8192=0%, Rehash=0, Collisions=0/30=0%
-# Finished Make data base on Fri Mar  7 23:59:00 2025
+# Load=22/8192=0%, Rehash=0, Collisions=0/35=0%
+# Finished Make data base on Sun Mar  9 23:15:48 2025
 
  
