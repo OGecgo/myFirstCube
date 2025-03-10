@@ -15,8 +15,9 @@ float* callProjMatrix(int xSize, int ySize, int FOV, int zNear, int zFar){
     // if give ctg(FOV/2) they going to infinity for FOV -> 0 and 0 if FOV -> 180 
     //with that i can work with perspective
     //matrix
-    float a = ((float)ySize / (float)xSize) * 1 / tanf(FOV / 2.0 / 180 * PI);// ctg(FOV / 2) == tanf(FOV / 2.0 / 180 * PI)
-    float b = ((float)ySize / (float)xSize) * 1 / tanf(FOV / 2.0 / 180 * PI);
+    float a = ( ((float)ySize / (float)xSize)) / tanf(FOV / 2.0 / 180 * PI);// ctg(FOV / 2) == tanf(FOV / 2.0 / 180 * PI)
+    float b = 1 / tanf(FOV / 2.0 / 180 * PI);
+    //float b = ( ((float)ySize / (float)xSize)) / tanf(FOV / 2.0 / 180 * PI);// ctg(FOV / 2) == tanf(FOV / 2.0 / 180 * PI)
     float c = (float)zFar/(zFar - zNear); //more close to user screen more c -> 1
     float d = (float)(-zFar * zNear)/(zFar - zNear); //more close to user screen more d -> 0
 
@@ -30,10 +31,10 @@ float* callProjMatrix(int xSize, int ySize, int FOV, int zNear, int zFar){
 
 float* callTransformations(float X, float Y, float Z){
     float* matrix = (float*)malloc(4 * 4 * sizeof(float));
-    matrix[0] = X;  matrix[1] = 0;  matrix[2] = 0;  matrix[3] = 0;
-    matrix[4] = 0;  matrix[5] = Y;  matrix[6] = 0;  matrix[7] = 0;
-    matrix[8] = 0;  matrix[9] = 0;  matrix[10] = Z; matrix[11] = 1;
-    matrix[12] = 0; matrix[13] = 0; matrix[14] = 0; matrix[15] = 0;
+    matrix[0] = 1;  matrix[1] = 0;  matrix[2] = 0;  matrix[3] = X;
+    matrix[4] = 0;  matrix[5] = 1;  matrix[6] = 0;  matrix[7] = Y;
+    matrix[8] = 0;  matrix[9] = 0;  matrix[10] = 1; matrix[11] = Z;
+    matrix[12] = 0; matrix[13] = 0; matrix[14] = 0; matrix[15] = 1;
     return matrix; 
 }
 
@@ -41,9 +42,9 @@ float* callTransformations(float X, float Y, float Z){
 float* callRotateX(float angle){
     float* matrix = (float*)malloc(4 * 4 * sizeof(float));
     matrix[0] = 1;  matrix[1] = 0;            matrix[2] = 0;             matrix[3] = 0;
-    matrix[4] = 0;  matrix[5] = cosf(angle);  matrix[6] = sinf(angle);   matrix[7] = 0;
-    matrix[8] = 0;  matrix[9] = -sinf(angle); matrix[10] = cosf(angle);  matrix[11] = 1;
-    matrix[12] = 0; matrix[13] = 0;           matrix[14] = 0;            matrix[15] = 0;
+    matrix[4] = 0;  matrix[5] = cosf(angle);  matrix[6] = -sinf(angle);   matrix[7] = 0;
+    matrix[8] = 0;  matrix[9] = sinf(angle); matrix[10] = cosf(angle);  matrix[11] = 0;
+    matrix[12] = 0; matrix[13] = 0;           matrix[14] = 0;            matrix[15] = 1;
     return matrix; 
 }
 
@@ -51,17 +52,17 @@ float* callRotateY(float angle){
     float* matrix = (float*)malloc(4 * 4 * sizeof(float));
     matrix[0] = cosf(angle);  matrix[1] = 0;  matrix[2] = sinf(angle);  matrix[3] = 0;
     matrix[4] = 0;            matrix[5] = 1;  matrix[6] = 0;            matrix[7] = 0;
-    matrix[8] = -sinf(angle); matrix[9] = 0;  matrix[10] = cosf(angle); matrix[11] = 1;
-    matrix[12] = 0;           matrix[13] = 0; matrix[14] = 0;           matrix[15] = 0;
+    matrix[8] = -sinf(angle); matrix[9] = 0;  matrix[10] = cosf(angle); matrix[11] = 0;
+    matrix[12] = 0;           matrix[13] = 0; matrix[14] = 0;           matrix[15] = 1;
     return matrix; 
 }
 
 float* callRotateZ(float angle){
     float* matrix = (float*)malloc(4 * 4 * sizeof(float));
-    matrix[0] = cosf(angle); matrix[1] = -sinf(angle); matrix[2] = 0;  matrix[3] = 0;
-    matrix[4] = sinf(angle); matrix[5] = cosf(angle);  matrix[6] = 0;  matrix[7] = 0;
-    matrix[8] = 0;           matrix[9] = 0;            matrix[10] = 1; matrix[11] = 1;
-    matrix[12] = 0;          matrix[13] = 0;           matrix[14] = 0; matrix[15] = 0;
+    matrix[0] = cosf(angle); matrix[1] = sinf(angle); matrix[2] = 0;  matrix[3] = 0;
+    matrix[4] = -sinf(angle); matrix[5] = cosf(angle);  matrix[6] = 0;  matrix[7] = 0;
+    matrix[8] = 0;           matrix[9] = 0;            matrix[10] = 1; matrix[11] = 0;
+    matrix[12] = 0;          matrix[13] = 0;           matrix[14] = 0; matrix[15] = 1;
     return matrix; 
 }
 
@@ -115,25 +116,6 @@ void BresenhamLineAlgorithm(std::vector<int*>& vec, int* pos1, int* pos2) {
     }
 }
 
-void addMatrix(std::vector<float*>& face, float* Matrix){
-    // addition face amd matrix [a11, a22, a33 a44] from Matrix
-    for (int i = 0; i < face.size(); i++) {
-        float x = face[i][0] + Matrix[0];
-        float y = face[i][1] + Matrix[5];
-        float z = face[i][2] + Matrix[10];
-        float w = face[i][3] + Matrix[15];
-
-        //set value
-        face[i][0] = x;
-        face[i][1] = y;
-        face[i][2] = z;
-        face[i][3] = w;
-
-        //debug print
-        //printf("3D Position: (%f, %f, %f, %f)\n", face[i][0], face[i][1], face[i][2], face[i][3]);
-    }
-}
-
 void multiplyMatrix(std::vector<float*>& face, float* Matrix){
 
     for (int i = 0; i < face.size(); i++) {
@@ -142,11 +124,11 @@ void multiplyMatrix(std::vector<float*>& face, float* Matrix){
         float z = face[i][0] * Matrix[2] + face[i][1] * Matrix[6] + face[i][2] * Matrix[10] + face[i][3] * Matrix[14];
         float w = face[i][0] * Matrix[3] + face[i][1] * Matrix[7] + face[i][2] * Matrix[11] + face[i][3] * Matrix[15];
         
-        //printf("%f\n", w);
         if (w != 0) {
             x /= w;
             y /= w;
             z /= w;
+            w /= w;
         }
         //set value
         face[i][0] = x;
@@ -157,9 +139,7 @@ void multiplyMatrix(std::vector<float*>& face, float* Matrix){
         //debug print
         //printf("3D Position: (%f, %f, %f, %f)\n", face[i][0], face[i][1], face[i][2], face[i][3]);
     }
-    // Debug print for face and matrix
-    // printf("Face: (x%f, y%f, z%f, w%f)\n", face[0][0], face[0][1], face[0][2], face[0][3]);
-    // printf("Matrix: z(x%f, y%f, z%f, w%f)\n", Matrix[2] * face[0][0], Matrix[6] * face[0][1], Matrix[10], Matrix[14]);
+    free(Matrix);
 }
 
 std::vector<int*> convertPositions(std::vector<float*> face, int xSize, int ySize){
@@ -172,7 +152,7 @@ std::vector<int*> convertPositions(std::vector<float*> face, int xSize, int ySiz
         int screenX = (int)((x + 1) * (xSize / 2.0));
         int screenY = (int)((1 - y) * (ySize / 2.0));
         
-        
+            
         // Debug print
         //printf("2D Position: (%d, %d)\n", screenX, screenY);
         

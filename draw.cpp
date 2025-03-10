@@ -24,11 +24,11 @@ void drawFace(std::vector<int*>& vec, int* pos1, int* pos2, int* pos3, int* pos4
 
 void drawCube(std::vector<int*>& vec){
     drawFace(vec, vec[0], vec[1], vec[2], vec[3]); // Front face
-    // drawFace(vec, vec[4], vec[5], vec[6], vec[7]); // Back face
-    // drawFace(vec, vec[0], vec[1], vec[5], vec[4]); // Top face
-    // drawFace(vec, vec[2], vec[3], vec[7], vec[6]); // Bottom face
-    // drawFace(vec, vec[1], vec[2], vec[6], vec[5]); // Right face
-    // drawFace(vec, vec[0], vec[3], vec[7], vec[4]); // Left face
+    drawFace(vec, vec[4], vec[5], vec[6], vec[7]); // Back face
+    drawFace(vec, vec[0], vec[1], vec[5], vec[4]); // Top face
+    drawFace(vec, vec[2], vec[3], vec[7], vec[6]); // Bottom face
+    drawFace(vec, vec[1], vec[2], vec[6], vec[5]); // Right face
+    drawFace(vec, vec[0], vec[3], vec[7], vec[4]); // Left face
 
     // makeTringle(vec, vec[0], vec[1], vec[2]);//front face
     // makeTringle(vec, vec[1], vec[2], vec[3]);
@@ -52,7 +52,7 @@ void drawScreen(std::vector<int*> draw, int xSize, int ySize){
                 if(draw[i][0] == x && draw[i][1] == y) b = true;
             }
             if(b) printf(" ");
-            else printf("Q");
+            else printf("@");
         }
         printf("\n");
     }
