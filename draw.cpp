@@ -3,7 +3,9 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <cstdio>
-#include "myVector.hpp"
+#include "myMatrix.hpp"
+
+#define clrscr(){ system("@cls||clear"); }
 
 
 void makeTringle(std::vector<int*>& vec, int* pos1, int* pos2, int* pos3){
@@ -43,6 +45,9 @@ void drawCubewithDringle(std::vector<int*>& vec){
 void drawScreen(std::vector<int*> draw, int xSize, int ySize){
     //draw
     printf("\x1b[H");
+    printf("\n\n\n\n\n\n\n\n\n");
+    //clrscr();  
+
     //screan
     for (int y = 0; y <= ySize; y++){
         for (int x = 0; x <= xSize; x++){

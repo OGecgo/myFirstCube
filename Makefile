@@ -1,6 +1,6 @@
 EXEC = Test
 FILE = $(EXEC)
-OBJECTC = main.cpp myVector.cpp draw.cpp 
+OBJECTC = main.cpp myMatrix.cpp draw.cpp 
 CHANGES = $(OBJECTC) 
 
 CFLAGS = -g

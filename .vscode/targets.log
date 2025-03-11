@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Mar 10 20:35:30 2025
+# Make data base, printed on Tue Mar 11 22:47:38 2025
 
 # Variables
 
@@ -49,7 +51,7 @@ QT_ACCESSIBILITY = 1
 # environment
 SNAP_INSTANCE_NAME = code
 # environment
-GDK_PIXBUF_MODULEDIR = /snap/code/184/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
+GDK_PIXBUF_MODULEDIR = /snap/code/186/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -59,7 +61,7 @@ PWD = /home/go/Desktop/C/Cube
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
-XDG_DATA_DIRS = /home/go/snap/code/184/.local/share:/home/go/snap/code/184:/snap/code/184/usr/share:/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+XDG_DATA_DIRS = /home/go/snap/code/186/.local/share:/home/go/snap/code/186:/snap/code/186/usr/share:/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
 # environment
 SNAP_EUID = 1000
 # automatic
@@ -67,7 +69,7 @@ SNAP_EUID = 1000
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /home/go/.config/Code/CachedData/e54c774e0add60467559eb0d1e229c6452cf8447
+VSCODE_CODE_CACHE_PATH = /home/go/.config/Code/CachedData/2fc07b811f760549dab9be9d2bedd06c51dfcb9a
 # environment
 LANG = C
 # environment
@@ -111,15 +113,15 @@ MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 4336
+VSCODE_PID = 4243
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-XDG_DATA_HOME = /home/go/snap/code/184/.local/share
+XDG_DATA_HOME = /home/go/snap/code/186/.local/share
 # environment
-SESSION_MANAGER = local/go-IdeaPad-Gaming-3-15IHU6:@/tmp/.ICE-unix/3181,unix/go-IdeaPad-Gaming-3-15IHU6:/tmp/.ICE-unix/3181
+SESSION_MANAGER = local/go-IdeaPad-Gaming-3-15IHU6:@/tmp/.ICE-unix/3135,unix/go-IdeaPad-Gaming-3-15IHU6:/tmp/.ICE-unix/3135
 # automatic
 *F = $(notdir $*)
 # environment
@@ -131,11 +133,11 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # makefile (from 'Makefile', line 1)
 EXEC = Test
 # environment
-VSCODE_NLS_CONFIG = {"userLocale":"en","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"/snap/code/184/usr/share/code/resources/app/out/nls.messages.json","locale":"en","availableLanguages":{}}
+VSCODE_NLS_CONFIG = {"userLocale":"en","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"/snap/code/186/usr/share/code/resources/app/out/nls.messages.json","locale":"en","availableLanguages":{}}
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-GTK_PATH = /snap/code/184/usr/lib/x86_64-linux-gnu/gtk-3.0
+GTK_PATH = /snap/code/186/usr/lib/x86_64-linux-gnu/gtk-3.0
 # environment
 GNOME_DESKTOP_SESSION_ID = this-is-deprecated
 # makefile
@@ -151,7 +153,7 @@ SHLVL = 1
 # environment
 JENV_LOADED = 1
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/1ec5e072_a5cd_4a35_bf71_bae68106fa4d
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/78325d0e_c842_47c5_9bbd_d6dcd7bb730c
 # environment
 MAKELEVEL := 0
 # default
@@ -175,11 +177,11 @@ SNAP_USER_COMMON = /home/go/snap/code/common
 # environment
 LC_TIME = el_GR.UTF-8
 # environment
-SNAP = /snap/code/184
+SNAP = /snap/code/186
 # environment
 JENV_SHELL = bash
 # environment
-SNAP_REVISION = 184
+SNAP_REVISION = 186
 # environment
 SNAP_REAL_HOME = /home/go
 # environment
@@ -205,7 +207,7 @@ DESKTOP_SESSION = ubuntu
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
-LOCPATH = /snap/code/184/usr/lib/locale
+LOCPATH = /snap/code/186/usr/lib/locale
 # 'override' directive
 GNUMAKEFLAGS := 
 # environment
@@ -217,7 +219,7 @@ SNAP_ARCH = amd64
 # makefile
 .DEFAULT_GOAL := Test
 # environment
-SYSTEMD_EXEC_PID = 3386
+SYSTEMD_EXEC_PID = 3308
 # environment
 DISPLAY = :1
 # environment
@@ -227,7 +229,7 @@ GTK_MODULES = gail:atk-bridge
 # default
 MAKE_VERSION := 4.3
 # environment
-SNAP_DATA = /var/snap/code/184
+SNAP_DATA = /var/snap/code/186
 # environment
 SNAP_CONTEXT = qv2CWYNC4bkUno9pfmCWtxt2McO_GgbTz5NnmlKXwJ8Giofz54Mv
 # environment
@@ -267,17 +269,17 @@ JDK_HOME = /home/go/.jenv/versions/temurin64-21.0.3
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-dd498937-1.97-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-dd498937-1.98-main.sock
 # environment
 TERM = xterm-256color
 # environment
-GTK_EXE_PREFIX = /snap/code/184/usr
+GTK_EXE_PREFIX = /snap/code/186/usr
 # environment
 SNAP_NAME = code
 # environment
-GSETTINGS_SCHEMA_DIR = /home/go/snap/code/184/.local/share/glib-2.0/schemas
+GSETTINGS_SCHEMA_DIR = /home/go/snap/code/186/.local/share/glib-2.0/schemas
 # makefile (from 'Makefile', line 3)
-OBJECTC = main.cpp myVector.cpp draw.cpp 
+OBJECTC = main.cpp myMatrix.cpp draw.cpp 
 # environment
 PAPERSIZE = a4
 # default
@@ -285,7 +287,7 @@ PAPERSIZE = a4
 # automatic
 <F = $(notdir $<)
 # environment
-SNAP_VERSION = e54c774e
+SNAP_VERSION = 2fc07b81
 # default
 SUFFIXES := 
 # environment
@@ -293,13 +295,14 @@ VSCODE_CLI = 1
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
+ 
 VTE_VERSION = 7600
 # environment
 SNAP_COMMON = /var/snap/code/common
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
 # environment
-SNAP_USER_DATA = /home/go/snap/code/184
+SNAP_USER_DATA = /home/go/snap/code/186
 # environment
 XDG_MENU_PREFIX = gnome-
 # environment
@@ -331,12 +334,6 @@ JRE_HOME = /home/go/.jenv/versions/temurin64-21.0.3
 
 # Files
 
-# Not a target:
-myVector.cpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
 rungdb:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -344,7 +341,7 @@ rungdb:
 #  recipe to execute (from 'Makefile', line 21):
 	gdb ./$(FILE)
 
-Test: main.cpp myVector.cpp draw.cpp
+Test: main.cpp myMatrix.cpp draw.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -356,10 +353,7 @@ Test: main.cpp myVector.cpp draw.cpp
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
- 
-make: *** No rule to make target 'all'.  Stop.
-
-#  Last modified 2025-03-08 23:17:25.431057912
+#  Last modified 2025-03-10 21:53:03.006894067
 #  File has been updated.
 #  Successfully updated.
 
@@ -409,6 +403,12 @@ draw.cpp:
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+myMatrix.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
 # Load=12/1024=1%, Rehash=0, Collisions=0/25=0%
 # VPATH Search Paths
@@ -417,12 +417,12 @@ draw.cpp:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 22 / storage = 194 B / avg = 8 B
-# current buf: size = 8162 B / used = 194 B / count = 22 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 22 / storage = 199 B / avg = 9 B
+# current buf: size = 8162 B / used = 199 B / count = 22 / avg = 9 B
 
 # strcache performance: lookups = 35 / hit rate = 37%
 # hash-table stats:
 # Load=22/8192=0%, Rehash=0, Collisions=0/35=0%
-# Finished Make data base on Mon Mar 10 20:35:30 2025
+# Finished Make data base on Tue Mar 11 22:47:38 2025
 
  

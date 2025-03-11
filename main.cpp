@@ -1,73 +1,85 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <cstdlib>
+#include <vector>
 
-#include "myVector.hpp"
+#include "myMatrix.hpp"
 #include "draw.hpp"
 
-#define clrscr(){ system("@cls||clear"); }
 #define xSize 75
 #define ySize 50
 #define FOV 90
+
 #define zFar 1000
 #define zNear 1
 
-void RotateX(std::vector<float*>& face) {
-    float* moveToCenter = callTransformations(-0, -0, -0.8);
-    float* moveBack = callTransformations(0, 0, 0.8);
+void RotateX(std::vector<float*>& positions) {
+    float* matrixMul = callTransformations(0, 0, 0);
+    multiplyMatrix4x4(matrixMul, callRotateX(0.2));
+    multiplyMatrix4x4(matrixMul, callTransformations(0, 0, 0));
+    multiplyMatrixPos4x1_4x4(matrixMul, positions);
 
-    multiplyMatrix(face, moveToCenter);  // got to center of map
-    multiplyMatrix(face, callRotateX(0.2)); // rotate
-    multiplyMatrix(face, moveBack);  // go back to position
+//     multiplyMatrixPos4x1_4x4(positions, callTransformations(0, 0, 1.25));
+//     multiplyMatrixPos4x1_4x4(positions, callRotateX(0.2));
+//     multiplyMatrixPos4x1_4x4(positions, callTransformations(0, 0, -1.25));
 }
 
-void RotateY(std::vector<float*>& face) {
-    float* moveToCenter = callTransformations(-0, -0, -1.25);
-    float* moveBack = callTransformations(0, 0, 1.25);
+void RotateY(std::vector<float*>& positions) {
+    float* matrixMul = callTransformations(0, 0, 1.25);
+    //multiplyMatrix4x4(matrixMul, callProjMatrix(xSize, ySize, FOV, zNear, zFar));
+    multiplyMatrix4x4(matrixMul, callRotateY(0.2));
+    multiplyMatrix4x4(matrixMul, callTransformations(0, 0, -1.25));
+    multiplyMatrixPos4x1_4x4(matrixMul, positions);
 
-    multiplyMatrix(face, moveToCenter);  // got to center of map
-    multiplyMatrix(face, callRotateY(0.2)); // rotate
-    multiplyMatrix(face, moveBack);  // go back to position
+    // multiplyMatrixPos4x1_4x4(positions, callTransformations(0, 0, 1.25));
+    // multiplyMatrixPos4x1_4x4(positions, callRotateY(0.2));
+    // multiplyMatrixPos4x1_4x4(positions, callTransformations(0, 0, -1.25));
 }
 
-void RotateZ(std::vector<float*>& face){
-    float* moveToCenter = callTransformations(-0, -0, -0.8);
-    float* moveBack = callTransformations(0, 0, 0.8);
 
-    multiplyMatrix(face, moveToCenter);  // got to center of map
-    multiplyMatrix(face, callRotateZ(0.2)); // rotate
-    multiplyMatrix(face, moveBack);  // go back to position}
+void RotateZ(std::vector<float*>& positions){
+    multiplyMatrixPos4x1_4x4(callRotateZ(0.2), positions);
 }
 
 int main() {  
-    clrscr();
+    system("@cls||clear");
+    printf("\x1b[H");
 
     float z1 = 1;
     float z2 = 1.5;
-    
-    // Coordinates for the cube
-    float pos1[4] = { -0.5, -0.5, z1, 1};
-    float pos2[4] = {  0.5, -0.5, z1, 1};
-    float pos3[4] = {  0.5,  0.5, z1, 1};
-    float pos4[4] = { -0.5,  0.5, z1, 1};
 
-    float pos5[4] = { -0.5, -0.5, z2, 1};
-    float pos6[4] = {  0.5, -0.5, z2, 1};
-    float pos7[4] = {  0.5,  0.5, z2, 1};
-    float pos8[4] = { -0.5,  0.5, z2, 1};
+    float xy1 = 0.5;
+    float xy2 = 0.5;
     
-    std::vector<float*> face = {pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8};
-    multiplyMatrix(face, callProjMatrix(xSize, ySize, FOV, zNear, zFar));
+    float pos1[4] = { -xy1, -xy1, z1, 1};
+    float pos2[4] = {  xy1, -xy1, z1, 1};
+    float pos3[4] = {  xy1,  xy1, z1, 1};
+    float pos4[4] = { -xy1,  xy1, z1, 1};
+
+    float pos5[4] = { -xy2, -xy2, z2, 1};
+    float pos6[4] = {  xy2, -xy2, z2, 1};
+    float pos7[4] = {  xy2,  xy2, z2, 1};
+    float pos8[4] = { -xy2,  xy2, z2, 1};
+    
+    std::vector<float*> positions = {pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8};
+    multiplyMatrixPos4x1_4x4(callProjMatrix(xSize, ySize, FOV, zNear, zFar), positions);
 
     int time = 1000 * 100;
 
-    while (true) {    
-        std::vector<int*> draw = convertPositions(face, xSize, ySize);
+    while (true) {  
+        
+        //multiplyMatrixPos4x1_4x4(callProjMatrix(xSize, ySize, FOV, zNear, zFar), positions);
+        
+        std::vector<int*> draw = convertPositions(positions, xSize, ySize);
+
         drawCube(draw);
         drawScreen(draw, xSize, ySize);
-    
-        RotateY(face);
-    
+        
+        RotateY(positions);
+
+        printf("\x1b[H");
+        printVector(positions);
+
         draw.clear();
         usleep(time);
     }
