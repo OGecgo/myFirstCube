@@ -69,7 +69,6 @@ int main() {
         
         //covert positions
         RotateY(positions);
-        RotateX(positions);
 
         //normilize
         free(normilize);
