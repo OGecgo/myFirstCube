@@ -19,26 +19,39 @@ void printVector(std::vector<float*> vec){
 
 
 
+// float* callProjMatrix(int xSize, int ySize, float FOV, float zNear, float zFar) {
+//     float a = ( ((float)ySize / (float)xSize) ) / tanf(FOV / 2.0 / 180 * PI);
+//     float b = ( ((float)ySize / (float)xSize) )  / tanf(FOV / 2.0 / 180 * PI);
+//     float c = (float)zFar/(zFar - zNear);
+//     float d = (float)(-zFar * zNear)/(zFar - zNear);
+
+//     float* projMatrix = (float*)malloc(4 * 4 * sizeof(float));
+//     projMatrix[0] = a;  projMatrix[1] = 0;  projMatrix[2] = 0;  projMatrix[3] = 0;
+//     projMatrix[4] = 0;  projMatrix[5] = b;  projMatrix[6] = 0;  projMatrix[7] = 0;
+//     projMatrix[8] = 0;  projMatrix[9] = 0;  projMatrix[10] = c; projMatrix[11] = -1;
+//     projMatrix[12] = 0; projMatrix[13] = 0; projMatrix[14] = d; projMatrix[15] = 0;
+//     return projMatrix;
+// }
+
 float* callProjMatrix(int xSize, int ySize, float FOV, float zNear, float zFar) {
-    float a = ( ((float)ySize / (float)xSize)) / tanf(FOV / 2.0 / 180 * PI);
-    float b = 1 / tanf(FOV / 2.0 / 180 * PI);
-    float c = (float)zFar/(zFar - zNear);
-    float d = (float)(-zFar * zNear)/(zFar - zNear);
+    float aspectRatio = (float)xSize / (float)ySize;
+    float fovRad = 1.0f / tanf(FOV * 0.5f / 180.0f * PI);
+    float zRange = zNear - zFar;
 
     float* projMatrix = (float*)malloc(4 * 4 * sizeof(float));
-    projMatrix[0] = a;  projMatrix[1] = 0;  projMatrix[2] = 0;  projMatrix[3] = 0;
-    projMatrix[4] = 0;  projMatrix[5] = b;  projMatrix[6] = 0;  projMatrix[7] = 0;
-    projMatrix[8] = 0;  projMatrix[9] = 0;  projMatrix[10] = c; projMatrix[11] = d;
-    projMatrix[12] = 0; projMatrix[13] = 0; projMatrix[14] = -1; projMatrix[15] = 0;
+    projMatrix[0]  = fovRad / aspectRatio; projMatrix[1]  = 0;                    projMatrix[2]  = 0;                       projMatrix[3] = 0;
+    projMatrix[4]  = 0;                    projMatrix[5]  = fovRad / aspectRatio; projMatrix[6]  = 0;                       projMatrix[7] = 0;
+    projMatrix[8]  = 0;                    projMatrix[9]  = 0;                    projMatrix[10] = (zFar + zNear) / zRange; projMatrix[11] = 2 * zFar * zNear / zRange;
+    projMatrix[12] = 0;                    projMatrix[13] = 0;                    projMatrix[14] = -1;                      projMatrix[15] = 0;
+
     return projMatrix;
 }
 
-
 float* callTransformations(float X, float Y, float Z){
     float* matrix = (float*)malloc(4 * 4 * sizeof(float));
-    matrix[0] = 1;  matrix[1] = 0;  matrix[2] = 0;  matrix[3] = X;
-    matrix[4] = 0;  matrix[5] = 1;  matrix[6] = 0;  matrix[7] = Y;
-    matrix[8] = 0;  matrix[9] = 0;  matrix[10] = 1; matrix[11] = Z;
+    matrix[0]  = 1; matrix[1]  = 0; matrix[2]  = 0; matrix[3]  = X;
+    matrix[4]  = 0; matrix[5]  = 1; matrix[6]  = 0; matrix[7]  = Y;
+    matrix[8]  = 0; matrix[9]  = 0; matrix[10] = 1; matrix[11] = Z;
     matrix[12] = 0; matrix[13] = 0; matrix[14] = 0; matrix[15] = 1;
     return matrix; 
 }
@@ -46,28 +59,28 @@ float* callTransformations(float X, float Y, float Z){
 //rotate around the midle of cordinates not midle of object
 float* callRotateX(float angle){
     float* matrix = (float*)malloc(4 * 4 * sizeof(float));
-    matrix[0] = 1;  matrix[1] = 0;            matrix[2] = 0;             matrix[3] = 0;
-    matrix[4] = 0;  matrix[5] = cosf(angle);  matrix[6] = -sinf(angle);  matrix[7] = 0;
-    matrix[8] = 0;  matrix[9] = sinf(angle);  matrix[10] = cosf(angle);  matrix[11] = 0;
+    matrix[0]  = 1; matrix[1]  = 0;           matrix[2]  = 0;            matrix[3]  = 0;
+    matrix[4]  = 0; matrix[5]  = cosf(angle); matrix[6]  = -sinf(angle); matrix[7]  = 0;
+    matrix[8]  = 0; matrix[9]  = sinf(angle); matrix[10] = cosf(angle);  matrix[11] = 0;
     matrix[12] = 0; matrix[13] = 0;           matrix[14] = 0;            matrix[15] = 1;
     return matrix; 
 }
 
 float* callRotateY(float angle){
     float* matrix = (float*)malloc(4 * 4 * sizeof(float));
-    matrix[0] = cosf(angle);  matrix[1] = 0;  matrix[2] = sinf(angle);  matrix[3] = 0;
-    matrix[4] = 0;            matrix[5] = 1;  matrix[6] = 0;            matrix[7] = 0;
-    matrix[8] = -sinf(angle); matrix[9] = 0;  matrix[10] = cosf(angle); matrix[11] = 0;
-    matrix[12] = 0;           matrix[13] = 0; matrix[14] = 0;           matrix[15] = 1;
+    matrix[0]  = cosf(angle);  matrix[1]  = 0; matrix[2] = sinf(angle);  matrix[3]  = 0;
+    matrix[4]  = 0;            matrix[5]  = 1; matrix[6] = 0;            matrix[7]  = 0;
+    matrix[8]  = -sinf(angle); matrix[9]  = 0; matrix[10] = cosf(angle); matrix[11] = 0;
+    matrix[12] = 0;            matrix[13] = 0; matrix[14] = 0;           matrix[15] = 1;
     return matrix; 
 }
 
 float* callRotateZ(float angle){
     float* matrix = (float*)malloc(4 * 4 * sizeof(float));
-    matrix[0] = cosf(angle);  matrix[1] = sinf(angle); matrix[2] = 0;  matrix[3] = 0;
-    matrix[4] = -sinf(angle); matrix[5] = cosf(angle); matrix[6] = 0;  matrix[7] = 0;
-    matrix[8] = 0;            matrix[9] = 0;           matrix[10] = 1; matrix[11] = 0;
-    matrix[12] = 0;           matrix[13] = 0;          matrix[14] = 0; matrix[15] = 1;
+    matrix[0]  = cosf(angle);  matrix[1]  = sinf(angle); matrix[2]  = 0; matrix[3]  = 0;
+    matrix[4]  = -sinf(angle); matrix[5]  = cosf(angle); matrix[6]  = 0; matrix[7]  = 0;
+    matrix[8]  = 0;            matrix[9]  = 0;           matrix[10] = 1; matrix[11] = 0;
+    matrix[12] = 0;            matrix[13] = 0;           matrix[14] = 0; matrix[15] = 1;
     return matrix; 
 }
 
@@ -121,21 +134,46 @@ void BresenhamLineAlgorithm(std::vector<int*>& vec, int* pos1, int* pos2) {
     }
 }
 
-// [x, y, z, w][a, b, c, d]
-//             [a, b, c, d]
-//             [a, b, c, d]
-//             [a, b, c, d]
+
+float* returnMultiplyMatrixPos4x1_4x4(float* Matrix, std::vector<float*>& Pos){
+
+    float* newMatrix = (float*)malloc(Pos.size() * 4 * sizeof(float)); //items * xyzw
+    for (int i = 0; i < Pos.size(); i++) {
+ 
+        float x = Matrix[0]  * Pos[i][0] + Matrix[1]  * Pos[i][1] + Matrix[2]  * Pos[i][2] + Matrix[3]  * Pos[i][3];
+        float y = Matrix[4]  * Pos[i][0] + Matrix[5]  * Pos[i][1] + Matrix[6]  * Pos[i][2] + Matrix[7]  * Pos[i][3];
+        float z = Matrix[8]  * Pos[i][0] + Matrix[9]  * Pos[i][1] + Matrix[10] * Pos[i][2] + Matrix[11] * Pos[i][3];
+        float w = Matrix[12] * Pos[i][0] + Matrix[13] * Pos[i][1] + Matrix[14] * Pos[i][2] + Matrix[15] * Pos[i][3];
+        
+        //PerspectiveDivision
+        if (w != 0) {
+            x /= w;
+            y /= w;
+            z /= w;
+            w = 1;
+        }
+
+        newMatrix[i * 4] = x;
+        newMatrix[i * 4 + 1] = y;
+        newMatrix[i * 4 + 2] = z;
+        newMatrix[i * 4 + 3] = w;
+        
+
+        //debug print
+        //printf("3D Position: (%f, %f, %f, %f)\n", Pos[i][0], Pos[i][1], Pos[i][2], Pos[i][3]);
+    }
+    free(Matrix);
+    return newMatrix;
+}
+
 void multiplyMatrixPos4x1_4x4(float* Matrix, std::vector<float*>& Pos){
 
+    float* newMatrix = (float*)malloc(Pos.size() * 4 * sizeof(float)); //items * xyzw
     for (int i = 0; i < Pos.size(); i++) {
-        // float x = Pos[i][0] * Matrix[0] + Pos[i][1] * Matrix[4] + Pos[i][2] * Matrix[8] + Pos[i][3] * Matrix[12];
-        // float y = Pos[i][0] * Matrix[1] + Pos[i][1] * Matrix[5] + Pos[i][2] * Matrix[9] + Pos[i][3] * Matrix[13];
-        // float z = Pos[i][0] * Matrix[2] + Pos[i][1] * Matrix[6] + Pos[i][2] * Matrix[10] + Pos[i][3] * Matrix[14];
-        // float w = Pos[i][0] * Matrix[3] + Pos[i][1] * Matrix[7] + Pos[i][2] * Matrix[11] + Pos[i][3] * Matrix[15];
-        
-        float x = Matrix[0] * Pos[i][0] + Matrix[1] * Pos[i][1] + Matrix[2] * Pos[i][2] + Matrix[3] * Pos[i][3];
-        float y = Matrix[4] * Pos[i][0] + Matrix[5] * Pos[i][1] + Matrix[6] * Pos[i][2] + Matrix[7] * Pos[i][3];
-        float z = Matrix[8] * Pos[i][0] + Matrix[9] * Pos[i][1] + Matrix[10] * Pos[i][2] + Matrix[11] * Pos[i][3];
+ 
+        float x = Matrix[0]  * Pos[i][0] + Matrix[1]  * Pos[i][1] + Matrix[2]  * Pos[i][2] + Matrix[3]  * Pos[i][3];
+        float y = Matrix[4]  * Pos[i][0] + Matrix[5]  * Pos[i][1] + Matrix[6]  * Pos[i][2] + Matrix[7]  * Pos[i][3];
+        float z = Matrix[8]  * Pos[i][0] + Matrix[9]  * Pos[i][1] + Matrix[10] * Pos[i][2] + Matrix[11] * Pos[i][3];
         float w = Matrix[12] * Pos[i][0] + Matrix[13] * Pos[i][1] + Matrix[14] * Pos[i][2] + Matrix[15] * Pos[i][3];
         
         //PerspectiveDivision
@@ -150,6 +188,12 @@ void multiplyMatrixPos4x1_4x4(float* Matrix, std::vector<float*>& Pos){
         Pos[i][1] = y;
         Pos[i][2] = z;
         Pos[i][3] = w;
+
+        // newMatrix[i * 4] = x;
+        // newMatrix[i * 4 + 1] = y;
+        // newMatrix[i * 4 + 2] = z;
+        // newMatrix[i * 4 + 3] = w;
+        
 
         //debug print
         //printf("3D Position: (%f, %f, %f, %f)\n", Pos[i][0], Pos[i][1], Pos[i][2], Pos[i][3]);
@@ -198,5 +242,28 @@ std::vector<int*> convertPositions(std::vector<float*> Pos, int xSize, int ySize
     return result;
 }
 
+
+std::vector<int*> convertPositions(float* Pos, int size, int xSize, int ySize){
+    std::vector<int*> result;
+    for (int i = 0; i < size; i++) {
+        float x = Pos[i * 4];
+        float y = Pos[i * 4 + 1];
+
+        // Convert to screen position where the middle position is 0
+        int screenX = (int)((x + 1) * (xSize / 2.0));
+        int screenY = (int)((1 + y) * (ySize / 2.0));
+        
+            
+        // Debug print
+        //printf("2D Position: (%d, %d)\n", screenX, screenY);
+        
+        //set value
+        int* newPos = (int*)malloc(sizeof(int) * 2);
+        newPos[0] = screenX;
+        newPos[1] = screenY;
+        result.push_back(newPos);
+    }
+    return result;
+}
 
 

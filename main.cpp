@@ -14,26 +14,18 @@
 #define zNear 1
 
 void RotateX(std::vector<float*>& positions) {
-    float* matrixMul = callTransformations(0, 0, 0);
+    float* matrixMul = callTransformations(0, 0, 1.25);
     multiplyMatrix4x4(matrixMul, callRotateX(0.2));
-    multiplyMatrix4x4(matrixMul, callTransformations(0, 0, 0));
+    multiplyMatrix4x4(matrixMul, callTransformations(0, 0, -1.25));
     multiplyMatrixPos4x1_4x4(matrixMul, positions);
 
-//     multiplyMatrixPos4x1_4x4(positions, callTransformations(0, 0, 1.25));
-//     multiplyMatrixPos4x1_4x4(positions, callRotateX(0.2));
-//     multiplyMatrixPos4x1_4x4(positions, callTransformations(0, 0, -1.25));
 }
 
 void RotateY(std::vector<float*>& positions) {
     float* matrixMul = callTransformations(0, 0, 1.25);
-    //multiplyMatrix4x4(matrixMul, callProjMatrix(xSize, ySize, FOV, zNear, zFar));
     multiplyMatrix4x4(matrixMul, callRotateY(0.2));
     multiplyMatrix4x4(matrixMul, callTransformations(0, 0, -1.25));
     multiplyMatrixPos4x1_4x4(matrixMul, positions);
-
-    // multiplyMatrixPos4x1_4x4(positions, callTransformations(0, 0, 1.25));
-    // multiplyMatrixPos4x1_4x4(positions, callRotateY(0.2));
-    // multiplyMatrixPos4x1_4x4(positions, callTransformations(0, 0, -1.25));
 }
 
 
@@ -45,6 +37,7 @@ int main() {
     system("@cls||clear");
     printf("\x1b[H");
 
+    //positions
     float z1 = 1;
     float z2 = 1.5;
 
@@ -62,20 +55,26 @@ int main() {
     float pos8[4] = { -xy2,  xy2, z2, 1};
     
     std::vector<float*> positions = {pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8};
-    multiplyMatrixPos4x1_4x4(callProjMatrix(xSize, ySize, FOV, zNear, zFar), positions);
-
+    //normilize
+    float* normilize = returnMultiplyMatrixPos4x1_4x4(callProjMatrix(xSize, ySize, FOV, zNear, zFar), positions);
+    //time
     int time = 1000 * 100;
 
     while (true) {  
         
-        //multiplyMatrixPos4x1_4x4(callProjMatrix(xSize, ySize, FOV, zNear, zFar), positions);
-        
-        std::vector<int*> draw = convertPositions(positions, xSize, ySize);
-
+        //draw
+        std::vector<int*> draw = convertPositions(normilize, positions.size(), xSize, ySize);
         drawCube(draw);
         drawScreen(draw, xSize, ySize);
         
+        //covert positions
         RotateY(positions);
+        RotateX(positions);
+
+        //normilize
+        free(normilize);
+        normilize = returnMultiplyMatrixPos4x1_4x4(callProjMatrix(xSize, ySize, FOV, zNear, zFar), positions);
+
 
         printf("\x1b[H");
         printVector(positions);

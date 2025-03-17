@@ -10,8 +10,10 @@ float* callRotateY(float angel);
 float* callRotateZ(float angel);
 void BresenhamLineAlgorithm(std::vector<int*>& vec, int* pos1, int* pos2);
 void addMatrix(std::vector<float*>& face, float* Matrix);
+float* returnMultiplyMatrixPos4x1_4x4(float* Matrix, std::vector<float*>& Pos);
 void multiplyMatrixPos4x1_4x4(float* Matrix, std::vector<float*>& Pos);
 void multiplyMatrix4x4(float* &matrix1, float* matrix2);
 std::vector<int*> convertPositions(std::vector<float*> face, int xSize, int ySize);
+std::vector<int*> convertPositions(float* Pos, int size, int xSize, int ySize);
 
 #endif // MYMATRIX_H

@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Mar 11 22:47:38 2025
+# Make data base, printed on Mon Mar 17 15:47:05 2025
 
 # Variables
 
@@ -83,7 +81,7 @@ JENV_FORCEJDKHOME = true
 # environment
 MEMORY_PRESSURE_WATCH = /sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.SettingsDaemon.MediaKeys.service/memory.pressure
 # environment
-GNOME_TERMINAL_SERVICE = :1.93
+GNOME_TERMINAL_SERVICE = :1.113
 # makefile
 MAKEFLAGS = pqrR
 # makefile
@@ -113,7 +111,7 @@ MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 4243
+VSCODE_PID = 10558
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -121,7 +119,7 @@ XDG_SESSION_TYPE = x11
 # environment
 XDG_DATA_HOME = /home/go/snap/code/186/.local/share
 # environment
-SESSION_MANAGER = local/go-IdeaPad-Gaming-3-15IHU6:@/tmp/.ICE-unix/3135,unix/go-IdeaPad-Gaming-3-15IHU6:/tmp/.ICE-unix/3135
+SESSION_MANAGER = local/go-IdeaPad-Gaming-3-15IHU6:@/tmp/.ICE-unix/3168,unix/go-IdeaPad-Gaming-3-15IHU6:/tmp/.ICE-unix/3168
 # automatic
 *F = $(notdir $*)
 # environment
@@ -153,7 +151,7 @@ SHLVL = 1
 # environment
 JENV_LOADED = 1
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/78325d0e_c842_47c5_9bbd_d6dcd7bb730c
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/376d9efc_7c6d_4559_bca2_47f39a2bf7be
 # environment
 MAKELEVEL := 0
 # default
@@ -219,7 +217,7 @@ SNAP_ARCH = amd64
 # makefile
 .DEFAULT_GOAL := Test
 # environment
-SYSTEMD_EXEC_PID = 3308
+SYSTEMD_EXEC_PID = 3336
 # environment
 DISPLAY = :1
 # environment
@@ -295,8 +293,10 @@ VSCODE_CLI = 1
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
- 
 VTE_VERSION = 7600
+ 
+make: *** No rule to make target 'all'.  Stop.
+
 # environment
 SNAP_COMMON = /var/snap/code/common
 # default
@@ -423,6 +423,6 @@ myMatrix.cpp:
 # strcache performance: lookups = 35 / hit rate = 37%
 # hash-table stats:
 # Load=22/8192=0%, Rehash=0, Collisions=0/35=0%
-# Finished Make data base on Tue Mar 11 22:47:38 2025
+# Finished Make data base on Mon Mar 17 15:47:05 2025
 
  
