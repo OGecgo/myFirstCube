@@ -1,4 +1,4 @@
-#include "myMatrix.hpp"
+#include "../headers/myMatrix.hpp"
 
 #include <stdio.h>
 #include <cmath>
@@ -16,22 +16,6 @@ void printVector(std::vector<float*> vec){
     }
 
 }
-
-
-
-// float* callProjMatrix(int xSize, int ySize, float FOV, float zNear, float zFar) {
-//     float a = ( ((float)ySize / (float)xSize) ) / tanf(FOV / 2.0 / 180 * PI);
-//     float b = ( ((float)ySize / (float)xSize) )  / tanf(FOV / 2.0 / 180 * PI);
-//     float c = (float)zFar/(zFar - zNear);
-//     float d = (float)(-zFar * zNear)/(zFar - zNear);
-
-//     float* projMatrix = (float*)malloc(4 * 4 * sizeof(float));
-//     projMatrix[0] = a;  projMatrix[1] = 0;  projMatrix[2] = 0;  projMatrix[3] = 0;
-//     projMatrix[4] = 0;  projMatrix[5] = b;  projMatrix[6] = 0;  projMatrix[7] = 0;
-//     projMatrix[8] = 0;  projMatrix[9] = 0;  projMatrix[10] = c; projMatrix[11] = -1;
-//     projMatrix[12] = 0; projMatrix[13] = 0; projMatrix[14] = d; projMatrix[15] = 0;
-//     return projMatrix;
-// }
 
 float* callProjMatrix(int xSize, int ySize, float FOV, float zNear, float zFar) {
     float aspectRatio = (float)xSize / (float)ySize;
@@ -227,7 +211,7 @@ std::vector<int*> convertPositions(std::vector<float*> Pos, int xSize, int ySize
 
         // Convert to screen position where the middle position is 0
         int screenX = (int)((x + 1) * (xSize / 2.0));
-        int screenY = (int)((1 + y) * (ySize / 2.0));
+        int screenY = (int)((y + 1) * (ySize / 2.0));
         
             
         // Debug print

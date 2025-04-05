@@ -1,6 +1,6 @@
-EXEC = Test
+EXEC = Run 
 FILE = $(EXEC)
-OBJECTC = main.cpp myMatrix.cpp draw.cpp 
+OBJECTC = res/readTxt.cpp main.cpp
 CHANGES = $(OBJECTC) 
 
 CFLAGS = -g

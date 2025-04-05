@@ -1,9 +1,9 @@
-#include "draw.hpp"
+#include "../headers/draw.hpp"
 
 #include <cstdlib>
 #include <unistd.h>
 #include <cstdio>
-#include "myMatrix.hpp"
+#include "../headers/myMatrix.hpp"
 
 #define clrscr(){ system("@cls||clear"); }
 
