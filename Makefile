@@ -1,6 +1,6 @@
 EXEC = Run 
 FILE = $(EXEC)
-OBJECTC = res/readTxt.cpp main.cpp
+OBJECTC = $(wildcard src/*.cpp) $(wildcard res/*.cpp) main.cpp
 CHANGES = $(OBJECTC) 
 
 CFLAGS = -g

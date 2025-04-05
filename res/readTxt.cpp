@@ -8,33 +8,47 @@ std::vector<int*> returnVectorIntArrayFromTxt(const char* path, int sizeInt){
     std::vector<int*> vec;
     FILE* file = fopen(path, "r");
 
-    if (file == NULL){
-        printf("Failed to open %s", path);
+    if (file == NULL){// test
+        printf("Error: Failed to open %s", path);
         return vec;
     }
 
     char ch;
-    int*  array;
-    int pos = 0;
+    int boolArray = 0; // new item
+    int* array; // item for vector
+    int pos; //position of array
+    int neg = 1; //for negativ number
     if (fgetc(file) == '<'){// start vec
         while ((ch = fgetc(file)) != EOF){
-            if (ch == '>') break; // end vec
 
-            if (ch == '['){ // start array
+            if (ch == '['){ 
+                boolArray = 1;
                 array = (int*)malloc(sizeof(int) * sizeInt);
-                while ((ch = fgetc(file)) != EOF){  
-                    if (ch == ']')  { // end the array and add it to vec
-                        vec.push_back(array);
-                        break;
-                    }
-                    if (ch >= 48 && ch <= 57){ // 123 + 1 => 1231 and add number
-                            int n = (int)ch - 48;
-                            array[pos] = (array[pos] * 10) + n;
-                        }
-                    if (ch == ',') pos++; // next number
-                }
                 pos = 0;
+                array[pos] = 0;
             }
+            if (boolArray){ // start array
+                if (ch == ']')  { // end the array and add it to vec
+                    vec.push_back(array);
+                    boolArray = 0;
+                    pos = 0;
+                    continue;
+                }    
+                if (ch == '-') neg = -1;
+                if (ch >= '0' && ch <= '9'){ // 123 + 1 => 1231 and add number
+                    array[pos] = (array[pos] * 10) + (ch - '0');
+                }
+                if (ch == ',') { // next number
+                     array[pos] *= neg;
+                    pos++;
+                    array[pos] = 0;
+                    neg = 1;
+                }  
+
+    
+            }
+
+            if (ch == '>') break; // end vec
         }
     }
     fclose(file);
