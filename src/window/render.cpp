@@ -3,9 +3,9 @@
 render::render(int xSizeScreen, int ySizeScreen, int sizeRenderer, Uint8 red, Uint8 green, Uint8 blue){
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) printf("ERROR: SDL not initialize, %s\n", SDL_GetError());
-    else{
+    else{;
         //create window
-        SDL_CreateWindowAndRenderer(xSizeScreen, ySizeScreen, SDL_WINDOW_SHOWN, &window, &renderer);
+        SDL_CreateWindowAndRenderer(xSizeScreen * sizeRenderer, ySizeScreen * sizeRenderer, 0, &window, &renderer);
 
         if (window == NULL || renderer == NULL) printf("ERROR: Window not created, %s\n", SDL_GetError());  
         else{
@@ -13,21 +13,21 @@ render::render(int xSizeScreen, int ySizeScreen, int sizeRenderer, Uint8 red, Ui
             SDL_SetRenderDrawColor(renderer, red, green, blue, 255);
             SDL_RenderClear(renderer);
         }
-    }
+    };
 }
 
-void render::makeFrame(std::vector<int*> pos){
+void render::makeFrame(std::vector<int*> pos){// hwris hroma akoma
+    //black positions
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     for (int* item: pos){
         SDL_RenderDrawPoint(renderer, item[0], item[1]);
     }
     SDL_RenderPresent(renderer);
-}
+};
 
 render::~render(){
     //destroy window
     SDL_DestroyWindow(window);
-    //Quit SDL sybsystems
     SDL_Quit();
 }
 

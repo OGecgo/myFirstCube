@@ -6,8 +6,9 @@
 #include <stdio.h>
 #include <vector>
 
-#define xSizeScreen 1200//75
-#define ySizeScreen 800//50
+#define sizePixel 4
+#define xSizeScreen 1200 / sizePixel//75
+#define ySizeScreen 800 / sizePixel//50
 #define FOV 90
 
 #define zFar 1000
