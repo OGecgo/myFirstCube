@@ -10,7 +10,7 @@ class render{
         SDL_Surface* screenSurFace;
     public:
         render(int xSizeScreen, int ySizeScreen, Uint8 red, Uint8 green, Uint8 blue);
-        void render::makeFrame(std::vector<int*> pos);
+        void makeFrame(std::vector<int*> pos);
         ~render();
 };
 

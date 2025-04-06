@@ -1,4 +1,4 @@
-#include "./headers/matrixOperations.hpp"
+#include "./header/matrixOperations.hpp"
 
 #include <cstdlib>
 

@@ -1,6 +1,6 @@
-#include "./headers/myConverts.hpp"
-#include "./headers/matrixOperations.hpp"
-#include "../res/headers/myMatrix.hpp"
+#include "./header/myConverts.hpp"
+#include "./header/matrixOperations.hpp"
+#include "../../res/headers/myMatrix.hpp"
 
 #include <cstdlib>
 

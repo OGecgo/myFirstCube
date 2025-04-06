@@ -1,6 +1,6 @@
 EXEC = Run 
 FILE = $(EXEC)
-OBJECTC = $(wildcard src/*.cpp) $(wildcard res/*.cpp) main.cpp
+OBJECTC = $(wildcard src/window/*.cpp) $(wildcard src/matrix/*.cpp) $(wildcard res/*.cpp) main.cpp
 CHANGES = $(OBJECTC) 
 
 CFLAGS = -g
