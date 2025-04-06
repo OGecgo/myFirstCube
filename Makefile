@@ -5,12 +5,10 @@ CHANGES = $(OBJECTC)
 
 CFLAGS = -g
 
-
+# -w wornings -lsdl2 for sdl 
 $(EXEC): $(CHANGES)
-	rm -f $(EXEC)
-	g++ $(OBJECTC) -o $(FILE)
-	rm -f $(OBJECTO)
-
+	rm -f $(EXEC) 
+	g++ $(OBJECTC) -w -lSDL2 -o $(FILE)
 clean:
 	rm -f $(OBJECTO) $(FILE)
 
