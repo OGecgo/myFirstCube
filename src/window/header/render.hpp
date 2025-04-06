@@ -7,9 +7,9 @@
 class render{
     private:
         SDL_Window* window;
-        SDL_Surface* screenSurFace;
+        SDL_Renderer* renderer;
     public:
-        render(int xSizeScreen, int ySizeScreen, Uint8 red, Uint8 green, Uint8 blue);
+        render(int xSizeScreen, int ySizeScreen, int sizeRenderer, Uint8 red, Uint8 green, Uint8 blue);
         void makeFrame(std::vector<int*> pos);
         ~render();
 };

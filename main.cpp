@@ -62,10 +62,10 @@ int main(){
     
 
     //render
-    uint8_t red = 0xFF;
-    uint8_t green = 0xFF;
-    uint8_t blue = 0xFF;
-    render* r = new render(xSizeScreen, ySizeScreen, red, green, blue);
+    int red = 0;
+    int green = 0;
+    int blue = 0;
+    render* r = new render(xSizeScreen, ySizeScreen, 4, red, green, blue);
     while (!windowClosed()){
         r->makeFrame(vectorPosInt);
     }
