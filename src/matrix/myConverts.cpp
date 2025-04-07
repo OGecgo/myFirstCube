@@ -1,9 +1,24 @@
 #include "./header/myConverts.hpp"
 #include "./header/matrixOperations.hpp"
-#include "../../res/headers/myMatrix.hpp"
 
 #include <cstdlib>
 
+
+#include <cmath>
+#define PI 3.141519
+float* returnProjMatrix(int xSizeScrean, int ySizeScrean, float FOV, float zNear, float zFar){
+    float aspectRatio = (float)xSizeScrean / (float)ySizeScrean;
+    float fovRad = 1.0f / tanf(FOV * 0.5f / 180.0f * PI);
+    float zRange = zNear - zFar;
+
+    float* projMatrix = (float*)malloc(4 * 4 * sizeof(float));
+    projMatrix[0]  = fovRad / aspectRatio; projMatrix[1]  = 0;                    projMatrix[2]  = 0;                            projMatrix[3] = 0;
+    projMatrix[4]  = 0;                    projMatrix[5]  = 1 / aspectRatio;      projMatrix[6]  = 0;                            projMatrix[7] = 0;
+    projMatrix[8]  = 0;                    projMatrix[9]  = 0;                    projMatrix[10] = (zFar + zNear) / zRange;      projMatrix[11] = (2 * zFar * zNear) / zRange;
+    projMatrix[12] = 0;                    projMatrix[13] = 0;                    projMatrix[14] = -1;                           projMatrix[15] = 0;
+
+    return projMatrix;
+}
      
 myConverts::myConverts(int xSizeScreen, int ySizeScreen, float FOV, float zNear, float zFar){
     this->xSizeScreen = xSizeScreen;
@@ -15,8 +30,31 @@ myConverts::myConverts(int xSizeScreen, int ySizeScreen, float FOV, float zNear,
 }  
 
 myConverts::~myConverts(){
-    free(this->projMatrix);
+    if (this->projMatrix != NULL) {
+        free(this->projMatrix);
+        this->projMatrix = NULL;
+    }
 }
+int myConverts::getXSizeScreen() { return this->xSizeScreen; }
+int myConverts::getYSizeScreen() { return this->ySizeScreen; }
+float myConverts::getFOV() { return this->FOV; }
+float myConverts::getZNear() { return this->zNear; }
+float myConverts::getZFar() { return this->zFar; }
+float* myConverts::getProjMatrix() { return this->projMatrix; }
+
+void myConverts::setXSizeScreen(int xSizeScreen) { this->xSizeScreen = xSizeScreen; }
+void myConverts::setYSizeScreen(int ySizeScreen) { this->ySizeScreen = ySizeScreen; }
+void myConverts::setFOV(float FOV) { this->FOV = FOV; }
+void myConverts::setZNear(float zNear) { this->zNear = zNear; }
+void myConverts::setZFar(float zFar) { this->zFar = zFar; }
+void myConverts::setProjMatrix(float* projMatrix) {
+    if (this->projMatrix != nullptr) {
+        free(this->projMatrix);
+    }
+    this->projMatrix = projMatrix;
+}
+
+
 
 
 std::vector<float*> myConverts::returnNormalizedUnitRange(std::vector<int*> pos){

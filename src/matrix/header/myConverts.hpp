@@ -15,8 +15,27 @@ class myConverts{
 
     public:
         //constractor-deconstractor
+        myConverts();
+        //make with projection matrix
         myConverts(int xSizeScreen, int ySizeScreen, float FOV, float zNear, float zFar);
         ~myConverts();
+
+        //getters-setter for every item
+        int getXSizeScreen();
+        int getYSizeScreen();
+        float getFOV();
+        float getZNear();
+        float getZFar();
+        float* getProjMatrix();
+        
+        //if change something projectio Matrix dont changed !
+        void setXSizeScreen(int xSizeScreen);
+        void setYSizeScreen(int ySizeScreen);
+        void setFOV(float FOV);
+        void setZNear(float zNear);
+        void setZFar(float zFar);
+        void setProjMatrix(float* projMatrix);
+
 
         // float = int / 100.000,0
         std::vector<float*> returnNormalizedUnitRange(std::vector<int*> pos);

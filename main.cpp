@@ -1,5 +1,8 @@
 #include "./res/headers/readTxt.hpp"
+
 #include "./src/matrix/header/myConverts.hpp"
+#include "./src/matrix/header/transformation.hpp"
+
 #include "./src/window/header/render.hpp"
 #include "./src/window/header/keyControler.hpp"
 
@@ -13,7 +16,7 @@
 
 #define zFar 1000
 #define zNear 1
-
+//--------Print
 void printVector(const std::vector<int*>& vec, int sizeInt) {
     
     printf("vec < ");
@@ -27,7 +30,6 @@ void printVector(const std::vector<int*>& vec, int sizeInt) {
     }
     printf(">\n");
 }
-
 void printVector(const std::vector<float*>& vec, int sizeInt) {
     
     printf("vec < ");
@@ -41,34 +43,69 @@ void printVector(const std::vector<float*>& vec, int sizeInt) {
     }
     printf(">\n");
 }
+//--------Clear
+void clearVector(std::vector<float*>& vec){
+    for(float* item: vec){
+        free(item);
+    }
+    vec.clear();
+}
+void clearVector(std::vector<int*>& vec){
+    for(int* item: vec){
+        free(item);
+    }
+    vec.clear();
+}
 
 int main(){ 
 
     //initialize positions
     const char* path = "./res/txtFiles/vectorPos.txt";
-    std::vector<int*> vectorPosInt = returnVectorIntArrayFromTxt(path, 4); // no 1 to -1 but 1000 to -1000 and then make 1000 => 1
-    myConverts* c = new myConverts(xSizeScreen, ySizeScreen, FOV, zFar, zNear);
+    std::vector<int*> vectorPosInt;
+    std::vector<float*> vectorPos;
+    std::vector<float*> normilizedPos;
+
+    myConverts* c;
+
+
+    vectorPosInt = returnVectorIntArrayFromTxt(path, 4); // no 1 to -1 but 1000 to -1000 and then make 1000 => 1
+    c = new myConverts(xSizeScreen, ySizeScreen, FOV, zFar, zNear);
     //normilize unit
-    std::vector<float*> vectorPos = c->returnNormalizedUnitRange(vectorPosInt);
-    printVector(vectorPos, 4);
+    vectorPos = c->returnNormalizedUnitRange(vectorPosInt);
+    clearVector(vectorPosInt);
+    //printVector(vectorPos, 4);
 
 
-    //normilized pos
-    vectorPosInt.clear();
-    std::vector<float*> normilizedPos = c->returnNormalizedPos(vectorPos);
-    printVector(normilizedPos, 4);
-    vectorPosInt = c->returnPosScreen(normilizedPos);
-    printVector(vectorPosInt, 2);
-
-    
-
-    //render
+    // //render
     int red = 0;
     int green = 0;
     int blue = 0;
     render* r = new render(xSizeScreen, ySizeScreen, sizePixel, red, green, blue);
     while (!windowClosed()){
+        //transforamtion
+        for (int pos = 0; pos < vectorPos.size(); pos++){
+            float* item = returnRotateZ(vectorPos[pos], 3);
+            delete[] vectorPos[pos];
+            vectorPos[pos] = item;
+        }
+
+        //normilize and take positions
+        normilizedPos = c->returnNormalizedPos(vectorPos);
+        clearVector(vectorPosInt);
+        vectorPosInt = c->returnPosScreen(normilizedPos);
+        clearVector(normilizedPos);
+        //printVector(vectorPosInt, 2);
+
         r->makeFrame(vectorPosInt);
+        r->delay(100);        
     }
 
+    //end
+    clearVector(normilizedPos);
+    clearVector(vectorPosInt);
+    clearVector(vectorPos);  
+    
+    delete r;
+    delete c;
+    return 0;    
 }
