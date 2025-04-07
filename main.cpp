@@ -7,8 +7,8 @@
 #include <vector>
 
 #define sizePixel 4
-#define xSizeScreen 1200 / sizePixel//75
-#define ySizeScreen 800 / sizePixel//50
+#define xSizeScreen 1200 / sizePixel //75
+#define ySizeScreen 800 / sizePixel //50
 #define FOV 90
 
 #define zFar 1000
@@ -47,16 +47,16 @@ int main(){
     //initialize positions
     const char* path = "./res/txtFiles/vectorPos.txt";
     std::vector<int*> vectorPosInt = returnVectorIntArrayFromTxt(path, 4); // no 1 to -1 but 1000 to -1000 and then make 1000 => 1
-    printVector(vectorPosInt, 4);
     myConverts* c = new myConverts(xSizeScreen, ySizeScreen, FOV, zFar, zNear);
-
     //normilize unit
     std::vector<float*> vectorPos = c->returnNormalizedUnitRange(vectorPosInt);
     printVector(vectorPos, 4);
 
+
     //normilized pos
     vectorPosInt.clear();
     std::vector<float*> normilizedPos = c->returnNormalizedPos(vectorPos);
+    printVector(normilizedPos, 4);
     vectorPosInt = c->returnPosScreen(normilizedPos);
     printVector(vectorPosInt, 2);
 
@@ -66,7 +66,7 @@ int main(){
     int red = 0;
     int green = 0;
     int blue = 0;
-    render* r = new render(xSizeScreen, ySizeScreen, 4, red, green, blue);
+    render* r = new render(xSizeScreen, ySizeScreen, sizePixel, red, green, blue);
     while (!windowClosed()){
         r->makeFrame(vectorPosInt);
     }

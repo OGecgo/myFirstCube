@@ -17,7 +17,7 @@ render::render(int xSizeScreen, int ySizeScreen, int sizeRenderer, Uint8 red, Ui
 }
 
 void render::makeFrame(std::vector<int*> pos){// hwris hroma akoma
-    //black positions
+    //white positions
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     for (int* item: pos){
         SDL_RenderDrawPoint(renderer, item[0], item[1]);

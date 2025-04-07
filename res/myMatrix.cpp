@@ -12,8 +12,8 @@ float* returnProjMatrix(int xSizeScrean, int ySizeScrean, float FOV, float zNear
     float* projMatrix = (float*)malloc(4 * 4 * sizeof(float));
     projMatrix[0]  = fovRad / aspectRatio; projMatrix[1]  = 0;                    projMatrix[2]  = 0;                            projMatrix[3] = 0;
     projMatrix[4]  = 0;                    projMatrix[5]  = 1 / aspectRatio;      projMatrix[6]  = 0;                            projMatrix[7] = 0;
-    projMatrix[8]  = 0;                    projMatrix[9]  = 0;                    projMatrix[10] = (zFar + zNear) / zRange;      projMatrix[11] = -1;
-    projMatrix[12] = 0;                    projMatrix[13] = 0;                    projMatrix[14] = -(2 * zFar * zNear) / zRange; projMatrix[15] = 0;
+    projMatrix[8]  = 0;                    projMatrix[9]  = 0;                    projMatrix[10] = (zFar + zNear) / zRange;      projMatrix[11] = (2 * zFar * zNear) / zRange;
+    projMatrix[12] = 0;                    projMatrix[13] = 0;                    projMatrix[14] = -1;                           projMatrix[15] = 0;
 
     return projMatrix;
 }

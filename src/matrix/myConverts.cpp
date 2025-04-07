@@ -55,8 +55,8 @@ std::vector<int*> myConverts::returnPosScreen(std::vector<float*> pos){
         float y = pos[i][1];
             
         // Convert to screen position where the middle position is 0
-        int screenX = (int)((x + 1) * (xSizeScreen / 2.0));
-        int screenY = (int)((y + 1) * (ySizeScreen / 2.0));
+        int screenX = (int)((1 - x) * (xSizeScreen / 2.0));
+        int screenY = (int)((1 - y) * (ySizeScreen / 2.0));
 
         //set value
         int* newPos = (int*)malloc(sizeof(int) * 2);

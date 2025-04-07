@@ -22,6 +22,6 @@ float* returnMultiplyMatrix4x4_4x1(float* matrix1, float* matrix2){
     newMatrix[1] = matrix1[4]  * matrix2[0] + matrix1[5]  * matrix2[1] + matrix1[6]  * matrix2[2] + matrix1[7]  * matrix2[3];
     newMatrix[2] = matrix1[8]  * matrix2[0] + matrix1[9]  * matrix2[1] + matrix1[10] * matrix2[2] + matrix1[11] * matrix2[3];
     newMatrix[3] = matrix1[12] * matrix2[0] + matrix1[13] * matrix2[1] + matrix1[14] * matrix2[2] + matrix1[15] * matrix2[3];
-        
+
     return newMatrix;
 }
