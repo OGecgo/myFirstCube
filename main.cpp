@@ -1,4 +1,4 @@
-#include "./res/headers/readTxt.hpp"
+#include "./res/header/reedObj.hpp"
 
 #include "./src/matrix/header/myConverts.hpp"
 #include "./src/matrix/header/transformation.hpp"
@@ -60,23 +60,27 @@ void clearVector(std::vector<int*>& vec){
 int main(){ 
 
     //initialize positions
-    const char* path = "./res/txtFiles/vectorPos.txt";
+    //const char* path = "./res/txtFiles/vectorPos.txt";
+    const char* path = "./res/Models/cube.obj";
     std::vector<int*> vectorPosInt;
     std::vector<float*> vectorPos;
     std::vector<float*> normilizedPos;
 
     myConverts* c;
+    reedObj* obj = new reedObj(path);
 
-
-    vectorPosInt = returnVectorIntArrayFromTxt(path, 4); // no 1 to -1 but 1000 to -1000 and then make 1000 => 1
+    //test
     c = new myConverts(xSizeScreen, ySizeScreen, FOV, zFar, zNear);
-    //normilize unit
-    vectorPos = c->returnNormalizedUnitRange(vectorPosInt);
-    clearVector(vectorPosInt);
-    //printVector(vectorPos, 4);
+    vectorPos = c->addDimentionW(obj->getVertex());
+    printVector(vectorPos, 4);
+
+    // //normilize unit
+    // vectorPos = c->returnNormalizedUnitRange(vectorPosInt);
+    // clearVector(vectorPosInt);
+    // //printVector(vectorPos, 4);
 
 
-    // //render
+    // // //render
     int red = 0;
     int green = 0;
     int blue = 0;
@@ -85,7 +89,7 @@ int main(){
         //transforamtion
         for (int pos = 0; pos < vectorPos.size(); pos++){
             float* item = returnRotateZ(vectorPos[pos], 3);
-            delete[] vectorPos[pos];
+            free(vectorPos[pos]);
             vectorPos[pos] = item;
         }
 
@@ -97,7 +101,7 @@ int main(){
         //printVector(vectorPosInt, 2);
 
         r->makeFrame(vectorPosInt);
-        r->delay(100);        
+        r->delay(200);        
     }
 
     //end

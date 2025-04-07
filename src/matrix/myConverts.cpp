@@ -54,7 +54,19 @@ void myConverts::setProjMatrix(float* projMatrix) {
     this->projMatrix = projMatrix;
 }
 
+std::vector<float*> myConverts::addDimentionW(std::vector<float*> pos){
 
+    std::vector<float*> newPos;
+    for(float* item: pos){
+        float* newItem = new float[4];
+        newItem[0] = item[0]; 
+        newItem[1] = item[1]; 
+        newItem[2] = item[2]; 
+        newItem[3] = 1; 
+        newPos.push_back(newItem);
+    }
+    return newPos;
+}
 
 
 std::vector<float*> myConverts::returnNormalizedUnitRange(std::vector<int*> pos){

@@ -1,7 +1,6 @@
 
 #include "./header/matrixOperations.hpp"
 
-#include <cstdlib>
 #include <cmath>
 
 
@@ -13,7 +12,7 @@ float* returnMove(float* matrixPos, float x, float y, float z){
         0, 0, 0, 1  
     };
     float* newMatrix = returnMultiplyMatrix4x4_4x1(move, matrixPos);
-    free(move);
+    delete[] move;
     return newMatrix;
 }
 float* returnRotateX(float* matrixPos, float angle){
@@ -24,7 +23,7 @@ float* returnRotateX(float* matrixPos, float angle){
         0, 0          , 0           , 1  
     };
     float* newMatrix = returnMultiplyMatrix4x4_4x1(move, matrixPos);
-    free(move);
+    delete[] move;
     return newMatrix;
 }
 float* returnRotateY(float* matrixPos, float angle){
@@ -35,7 +34,7 @@ float* returnRotateY(float* matrixPos, float angle){
         0           , 0, 0          , 1  
     };
     float* newMatrix = returnMultiplyMatrix4x4_4x1(move, matrixPos);
-    free(move);
+    delete[] move;
     return newMatrix;
 }
 float* returnRotateZ(float* matrixPos, float angle){
@@ -46,6 +45,6 @@ float* returnRotateZ(float* matrixPos, float angle){
         0           , 0          , 0, 1  
     };
     float* newMatrix = returnMultiplyMatrix4x4_4x1(move, matrixPos);
-    free(move);
+    delete[] move;
     return newMatrix;
 }

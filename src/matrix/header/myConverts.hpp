@@ -2,6 +2,9 @@
 #define MYCONVERTS_H 
 
 #include <vector>
+
+#define v& addItemMatrix
+
 //converts only for 3d dimentions, that mean vectors have item array with size 4 (x, y, z, w)
 
 class myConverts{
@@ -36,13 +39,12 @@ class myConverts{
         void setZFar(float zFar);
         void setProjMatrix(float* projMatrix);
 
+        std::vector<float*> addDimentionW(std::vector<float*> pos);
 
-        // float = int / 100.000,0
         std::vector<float*> returnNormalizedUnitRange(std::vector<int*> pos);
-
+        // first normalizedUnit
         std::vector<float*> returnNormalizedPos(std::vector<float*> pos);
-
-        // first normilizePosition
+        // first normilizedPosition
         std::vector<int*> returnPosScreen(std::vector<float*> pos);
 
 };
