@@ -1,6 +1,6 @@
-#include "./header/render.hpp"
+#include "./header/Window.hpp"
 
-render::render(int xSizeScreen, int ySizeScreen, int sizeRenderer, Uint8 red, Uint8 green, Uint8 blue){
+Window::Window(int xSizeScreen, int ySizeScreen, int sizeRenderer, Uint8 red, Uint8 green, Uint8 blue){
     this->red = red;
     this->green = green;
     this->blue = blue;
@@ -13,13 +13,13 @@ render::render(int xSizeScreen, int ySizeScreen, int sizeRenderer, Uint8 red, Ui
         if (window == NULL || renderer == NULL) printf("ERROR: Window not created, %s\n", SDL_GetError());  
         else{
             SDL_RenderSetScale(renderer, sizeRenderer, sizeRenderer);
-            SDL_SetRenderDrawColor(renderer, red, green, blue, 255);
+            SDL_SetRenderDrawColor(renderer, red, green, blue, 255); //make backgound color
             SDL_RenderClear(renderer);
         }
     };
 }
 
-render::~render() {
+Window::~Window() {
     if (renderer != nullptr) {
         SDL_DestroyRenderer(renderer);
         renderer = nullptr;
@@ -31,18 +31,18 @@ render::~render() {
     SDL_Quit();
 }
 
-void render::makeFrame(std::vector<int*> pos){// hwris hroma akoma
+void Window::makeFrame(std::vector<int*> pos){// hwris hroma akoma
     //white positions
-    SDL_SetRenderDrawColor(renderer, this->red, this->green, this->blue, 255);
+    SDL_SetRenderDrawColor(renderer, this->red, this->green, this->blue, 255);//first set background color
     SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);//then draw again the positions
     for (int* item: pos){
         SDL_RenderDrawPoint(renderer, item[0], item[1]);
     }
     SDL_RenderPresent(renderer);
 };
 
-void render::delay(int ms){
+void Window::delay(int ms){
     SDL_Delay(ms);
 }
 

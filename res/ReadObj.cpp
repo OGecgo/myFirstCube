@@ -1,11 +1,11 @@
-#include "./header/reedObj.hpp"
+#include "./header/ReadObj.hpp"
 
 #include <stdio.h>
 
 #define Max_Length 128
 
-reedObj::reedObj(const char* path){
-
+ReadObj::ReadObj(const char* path){
+    this->globalPos = 0;
     FILE* file = fopen(path, "r");
     if(file == NULL){
         printf("Error: Failed open file %s\n", path);
@@ -37,7 +37,7 @@ reedObj::reedObj(const char* path){
     }
 }
 
-reedObj::~reedObj(){
+ReadObj::~ReadObj(){
     if (!this->vertex.empty()){
         for(float* item: this->vertex){
             delete[] item;
@@ -52,5 +52,7 @@ reedObj::~reedObj(){
     }
 }
 
-std::vector<float*> reedObj::getVertex(){ return this->vertex; }
-std::vector<int*> reedObj::getFaces(){ return this->faces; }
+std::vector<float*> ReadObj::getVertex(){ return this->vertex; }
+std::vector<int*> ReadObj::getFaces(){ return this->faces; }  
+float ReadObj::getGlobalPos(){ return this->globalPos; }
+void ReadObj::setGlobalPos(float newPos){ this->globalPos = newPos; }   
