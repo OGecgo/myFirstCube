@@ -4,6 +4,9 @@
 #include <SDL2/SDL.h>
 #include <vector>
 
+//extend WincowControl
+#include "WindowControl.hpp"
+
 class Window{
     private:
         SDL_Window* window;
