@@ -1,7 +1,7 @@
-#ifndef OBJMAP_H
-#define OBJMAP_H
+#ifndef OBJ_H
+#define OBJ_H
 
-#include "./../../res/header/ReadObj.hpp"
+#include "./../res/ReadObj.hpp"
 
 #include <vector>
 #include <map>
@@ -38,4 +38,4 @@ class ObjMap{
 
 };
 
-#endif // OBJMAP_H
+#endif // OBJ_H

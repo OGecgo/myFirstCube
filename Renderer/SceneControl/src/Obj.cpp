@@ -1,4 +1,4 @@
-#include "./header/ObjMap.hpp"
+#include "../Obj.hpp"
 
 #include <cmath>
 #define PI 3.141519

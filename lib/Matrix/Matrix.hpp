@@ -15,7 +15,8 @@ class Matrix{
         int getColumnSize();
         float getMatrixItem(int row, int column);
         void setMatrixItem(int row, int column, float item);
-        Matrix* operator*(Matrix matrix);
+        Matrix* operator*(Matrix* matrix);
+        Matrix* operator*=(Matrix* matrix);
 };
 
 #endif // MATRIX_H 

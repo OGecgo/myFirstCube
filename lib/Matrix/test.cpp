@@ -28,7 +28,7 @@ int main(){
     printf("myMatrix2Size = rows(%d), columns(%d)\n", myMatrix2->getRowSize(), myMatrix2->getColumnSize());
 
     //test multiply
-    Matrix* newMatrix = (*myMatrix1) * (*myMatrix2);
+    Matrix* newMatrix = (* myMatrix1) * (myMatrix2);
     newMatrix->printMatrix();
     printf("newMatrixSize = rows(%d), columns(%d)\n", newMatrix->getRowSize(), newMatrix->getRowSize());
 

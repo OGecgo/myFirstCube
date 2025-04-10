@@ -1,4 +1,4 @@
-#include "./header/Window.hpp"
+#include "../Window.hpp"
 
 Window::Window(int xSizeScreen, int ySizeScreen, int sizeRenderer, Uint8 red, Uint8 green, Uint8 blue){
     this->red = red;

@@ -52,18 +52,18 @@ void Matrix::setMatrixItem(int column, int row, float item){
 
 
 
-Matrix* Matrix::operator*(Matrix matrix){
-    if (this->columnSize != matrix.rowSize){
-        printf("Error Matrix: myltiply have leftColumn(%d) != rightRow(%d)\n", this->columnSize, matrix.rowSize);
+Matrix* Matrix::operator*(Matrix* matrix){
+    if (this->columnSize != matrix->rowSize){
+        printf("Error Matrix: myltiply have leftColumn(%d) != rightRow(%d)\n", this->columnSize, matrix->rowSize);
         exit(1);
     }
-    Matrix* newMatrix = new Matrix(this->rowSize, matrix.columnSize);
+    Matrix* newMatrix = new Matrix(this->rowSize, matrix->columnSize);
     for (int thisRow = 0; thisRow < this->rowSize; thisRow++){
-        for (int matrixColumn = 0; matrixColumn < matrix.columnSize; matrixColumn++){
+        for (int matrixColumn = 0; matrixColumn < matrix->columnSize; matrixColumn++){
             //multiply row with column
             float item = 0.0f;
             for (int thisColumn = 0; thisColumn < this->columnSize; thisColumn++){
-                item += this->getMatrixItem(thisRow, thisColumn) * matrix.getMatrixItem(thisColumn, matrixColumn);
+                item += this->getMatrixItem(thisRow, thisColumn) * matrix->getMatrixItem(thisColumn, matrixColumn);
             }
             newMatrix->setMatrixItem(matrixColumn, thisRow, item);
         }

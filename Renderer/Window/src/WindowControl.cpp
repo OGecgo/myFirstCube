@@ -1,4 +1,4 @@
-#include "./header/WindowControl.hpp"
+#include "../WindowControl.hpp"
 int fsda(){}
 
 //polu hazi ilopoiisi
