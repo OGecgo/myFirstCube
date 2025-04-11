@@ -1,43 +1,62 @@
 #include "../Obj.hpp"
 
-#include <cmath>
-#define PI 3.141519
+#include <stdio.h>
 
-float* returnProjMatrix(int xSizeScrean, int ySizeScrean, float FOV, float zNear, float zFar){
-    float aspectRatio = (float)xSizeScrean / (float)ySizeScrean;
-    float fovRad = 1.0f / tanf(FOV * 0.5f / 180.0f * PI);
-    float zRange = zNear - zFar;
+#define Max_Length 128
 
-    float* projMatrix = (float*)malloc(4 * 4 * sizeof(float));
-    projMatrix[0]  = fovRad / aspectRatio; projMatrix[1]  = 0;                    projMatrix[2]  = 0;                            projMatrix[3] = 0;
-    projMatrix[4]  = 0;                    projMatrix[5]  = 1 / aspectRatio;      projMatrix[6]  = 0;                            projMatrix[7] = 0;
-    projMatrix[8]  = 0;                    projMatrix[9]  = 0;                    projMatrix[10] = (zFar + zNear) / zRange;      projMatrix[11] = (2 * zFar * zNear) / zRange;
-    projMatrix[12] = 0;                    projMatrix[13] = 0;                    projMatrix[14] = -1;                           projMatrix[15] = 0;
-
-    return projMatrix;
-}
-
-ObjMap::ObjMap(int xScreenSize, int yScreenSize, float FOV, float zNear, float zFar){
-    this->xScreenSize = xScreenSize;
-    this->yScreenSize = yScreenSize;
-    this->FOV = FOV;
-    this->zNear = zNear;
-    this->projMatrix = returnProjMatrix(xScreenSize, yScreenSize, FOV, zNear, zFar);
-}
-
-ObjMap::~ObjMap(){
-    if (this->projMatrix != NULL){
-        delete[] this->projMatrix;
-        this->projMatrix = NULL;
+Obj::Obj(const char* path){
+    this->globalPos = new Matrix(4, 1);
+    FILE* file = fopen(path, "r");
+    if(file == NULL){
+        printf("Error: Failed open file %s\n", path);
+        return;
     }
-    for (std::map<const char*, ReadObj>::iterator item = objs.begin(); item !=objs.end(); ++item){
-        (*item).second.~ReadObj();
-        objs.erase(item);
+
+    char line[Max_Length];
+    int pos = -1; // because start with space
+
+    while(fgets(line, sizeof(line), file)){
+        float num = 0;
+        int neg = 1;
+        if (line[0] == '#' || line[0] == '\n') continue;
+
+        else if (line[0] == 'v' && line[1] == ' '){
+            Matrix* vertexItem = new Matrix(4, 1);
+            float x, y, z;
+            sscanf(line, "v %f %f %f", &x, &y, &z);
+            vertexItem->setMatrixItem(0, 0, x);
+            vertexItem->setMatrixItem(1, 0, y);
+            vertexItem->setMatrixItem(2, 0, z);
+            this->vertex.push_back(vertexItem);
+        }
+
+        else if (line[0] == 'f' && line[1] == ' '){
+            int* facesItem = new int[3];
+            int v1, v2, v3, vt1, vt2, vt3, vm1, vm2, vm3;
+            sscanf(line, "f %d/%d/%d %d/%d/%d %d/%d/%d", &facesItem[0], &vt1, &vm1, &facesItem[1], &vt2, &vm2, &facesItem[2], &vt3, &vm3);
+            this->faces.push_back(facesItem);
+        }
+
+        else printf("Error line cannot read: %s", line);
     }
 }
 
-
-void ObjMap::openObj(const char* path){
-
-    
+Obj::~Obj(){
+    if (!this->vertex.empty()){
+        for(Matrix* item: this->vertex){
+            item->~Matrix();
+        }
+        this->vertex.clear();
+    }
+    if (!this->faces.empty()){
+        for(int* item: this->faces){
+            delete[] item;
+        }
+        this->vertex.clear(); 
+    }
 }
+
+std::vector<Matrix*> Obj::getVertex(){ return this->vertex; }
+std::vector<int*> Obj::getFaces(){ return this->faces; }  
+Matrix* Obj::getGlobalPos(){ return this->globalPos; }
+void Obj::setGlobalPos(Matrix* newPos){ this->globalPos = newPos; } 

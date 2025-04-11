@@ -1,41 +1,27 @@
 #ifndef OBJ_H
 #define OBJ_H
 
-#include "./../res/ReadObj.hpp"
-
+#include "../../lib/Matrix/Matrix.hpp"
 #include <vector>
-#include <map>
 
-class ObjMap{
-
+class Obj{
     private:
-        std::map<const char*, ReadObj> objs; // name -> objects
-        float* projMatrix; 
-        int xScreenSize, yScreenSize; // parameters camera
-        float FOV, zNear, zFar;
-
+        std::vector<Matrix*> vertex;
+        std::vector<int*> faces;
+        Matrix* globalPos;
     public:
-        //initialize map with projection matrix
-        ObjMap(int xScreenSize, int yScreenSize, float FOV, float zNear, float zFar);
-        ~ObjMap();
+        Obj(const char* path);
+        ~Obj();
 
-        //add obj to map
-        void openObj(const char* path);
+        std::vector<Matrix*> getVertex();
+        std::vector<int*> getFaces();
 
-        //transformations
-        void moveObj(const char* objName, float x, float y, float z);
-        void rotateXObj(const char* objName, int angle);
-        void rotateYObj(const char* objName, int angle);
-        void rotateZObj(const char* objName, int angle);
-
-        //change projecton matrix
-        void setMyProjectionMatrix(float* newProjMatrix);
-        void changeProjectionMatrixVar(int xScreenSize, int yScreenSize, float FOV, float zNear, float zFar);
-        
-        //take positions for drawiing
-        std::vector<int*> returnObjScreenPos(const char* objName);
-
+        Matrix* getGlobalPos();
+        std::vector<Matrix*> returnCovertedVertexToGlobalVertex();
+        void setGlobalPos(float x, float y, float z);
+        void setGlobalPos(Matrix* pos);
 
 };
+
 
 #endif // OBJ_H
