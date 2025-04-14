@@ -1,9 +1,9 @@
-#include "../headers/draw.hpp"
+#include "draw.hpp"
 
 #include <cstdlib>
 #include <unistd.h>
 #include <cstdio>
-#include "../headers/myMatrix.hpp"
+#include "myMatrix.hpp"
 
 #define clrscr(){ system("@cls||clear"); }
 
@@ -45,7 +45,7 @@ void drawCubewithDringle(std::vector<int*>& vec){
 void drawScreen(std::vector<int*> draw, int xSize, int ySize){
     //draw
     printf("\x1b[H");
-    printf("\n\n\n\n\n\n\n\n\n");
+    //printf("\n\n\n\n\n\n\n\n\n");
     //clrscr();  
 
     //screan

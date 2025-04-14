@@ -1,14 +1,16 @@
-EXEC = Run 
+EXEC = exe/Test
 FILE = $(EXEC)
-OBJECTC = $(wildcard src/window/*.cpp) $(wildcard src/matrix/*.cpp) $(wildcard res/*.cpp) main.cpp
+OBJECTC = main.cpp myMatrix.cpp draw.cpp 
 CHANGES = $(OBJECTC) 
 
 CFLAGS = -g
 
-# -w wornings -lsdl2 for sdl 
+
 $(EXEC): $(CHANGES)
-	rm -f $(EXEC) 
-	g++ $(OBJECTC) -w -lSDL2 -o $(FILE)
+	rm -f $(EXEC)
+	g++ $(OBJECTC) -o $(FILE)
+	rm -f $(OBJECTO)
+
 clean:
 	rm -f $(OBJECTO) $(FILE)
 

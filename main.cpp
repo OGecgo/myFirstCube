@@ -3,8 +3,8 @@
 #include <cstdlib>
 #include <vector>
 
-#include "../headers/myMatrix.hpp"
-#include "../headers/draw.hpp"
+#include "myMatrix.hpp"
+#include "draw.hpp"
 
 #define xSize 75
 #define ySize 50
@@ -75,8 +75,8 @@ int main() {
         normilize = returnMultiplyMatrixPos4x1_4x4(callProjMatrix(xSize, ySize, FOV, zNear, zFar), positions);
 
 
-        printf("\x1b[H");
-        printVector(positions);
+        //printf("\x1b[H");
+        //printVector(positions);
 
         draw.clear();
         usleep(time);
