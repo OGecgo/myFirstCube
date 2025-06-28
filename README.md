@@ -23,7 +23,13 @@ Welcome to **My First Cube**! This project is a simple yet fascinating explorati
    cd myFirstCube
 
 2. Compile the code:
+   run make file
+   ```bash
+   make
+   ```
+   or run manually
+   ```bash
     gcc -o myFirstCube main.cpp myMatrix.cpp draw.cpp 
-
-3. Run the program:
+   ```
+4. Run the program:
     ./myFirstCube
