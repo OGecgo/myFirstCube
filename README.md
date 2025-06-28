@@ -23,7 +23,7 @@ Welcome to **My First Cube**! This project is a simple yet fascinating explorati
    cd myFirstCube
 
 2. Compile the code:
-    gcc -o myFirstCube main.c
+    gcc -o myFirstCube main.cpp myMatrix.cpp draw.cpp 
 
 3. Run the program:
     ./myFirstCube
