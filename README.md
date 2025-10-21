@@ -29,7 +29,7 @@ Welcome to **My First Cube**! This project is a simple yet fascinating explorati
    ```
    or run manually
    ```bash
-    gcc -o myFirstCube main.cpp myMatrix.cpp draw.cpp 
+    g++ main.cpp myMatrix.cpp draw.cpp  -o Test
    ```
 4. Run the program:
     ./myFirstCube

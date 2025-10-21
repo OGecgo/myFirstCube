@@ -1,4 +1,4 @@
-EXEC = exe/Test
+EXEC = Test
 FILE = $(EXEC)
 OBJECTC = main.cpp myMatrix.cpp draw.cpp 
 CHANGES = $(OBJECTC) 
